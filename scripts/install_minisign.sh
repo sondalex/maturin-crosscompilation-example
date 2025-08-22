@@ -11,6 +11,11 @@ mkdir build
 cd build
 cmake ..
 make
-cp minisign $HOME/.local/bin/
+
+INSTALL_DIR="$HOME/.local/bin/"
+mkdir -p "$INSTALL_DIR"
+cp minisign $INSTALL_DIR
+
+
 
 rm -rf $TEMP_DIR

@@ -34,6 +34,10 @@ INSTALL_DIR="$HOME/.local/zig/0.15.1"
 mkdir -p "$INSTALL_DIR"
 mv zig-*/* "$INSTALL_DIR/"
 
+if [ -f "$GITHUB_PATH" ]; then
+  echo "$INSTALL_DIR" >> "$GITHUB_PATH"
+fi
+
 echo "Zig installed to $INSTALL_DIR"
 echo "Consider adding $INSTALL_DIR to your PATH"
 
