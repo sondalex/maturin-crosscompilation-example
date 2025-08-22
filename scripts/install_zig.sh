@@ -11,8 +11,8 @@ echo "Downloading zig"
 wget -q https://ziglang.org/download/0.15.1/zig-x86_64-linux-0.15.1.tar.xz 
 wget -q https://ziglang.org/download/0.15.1/zig-x86_64-linux-0.15.1.tar.xz.minisig
 
-if command -v minisign &> /dev/null; then
-    if minisign -Vm zig-x86_64-linux-0.15.1.tar.xz -P RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U;then
+if command -v $HOME/.local/bin/minisign &> /dev/null; then
+    if $HOME/.local/bin/minisign -Vm zig-x86_64-linux-0.15.1.tar.xz -P RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U;then
         echo "Signature verification succeeded"
     else
         echo "Signature verification failed"
