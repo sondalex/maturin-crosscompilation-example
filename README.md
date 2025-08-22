@@ -5,18 +5,17 @@
 
 Install libsodium (required for manysign)
 
-On Ubuntu
+    On Ubuntu
 
-```bash
-sudo install libsodium-dev
-```
+    ```bash
+    sudo install libsodium-dev
+    ```
 
-```bash
-sudo dnf install libsodium-devel
-```
+    On Fedora
 
-
-
+    ```bash
+    sudo dnf install libsodium-devel
+    ```
 
 Install manysign and zig, helpers are located in `scripts/`
 
@@ -26,7 +25,7 @@ Install maturin
 uv venv && uv pip install maturin
 ```
 
-# Cross compiling
+# Cross compiling Wheels
 
 **To Windows x86**
 
@@ -48,3 +47,21 @@ rustup target add aarch64-pc-windows-gnullvm
 ```bash
 uv tool run maturin build --target aarch64-pc-windows-gnullvm --zig -i python3.10 
 ```
+
+## Installing and Using the Wheel
+
+Install the Wheel: After building, install the wheel for your platform (e.g., Linux x86_64) in the virtual environment.
+
+```bash
+uv pip install target/wheels/maturin_crosscompilation_example-*.whl
+```
+
+**Test installed package**
+
+```bash
+(.venv) python
+>>> from maturin_crosscompilation_example import sum_as_string
+>>> sum_as_string(1, 2)
+'3'
+```
+
