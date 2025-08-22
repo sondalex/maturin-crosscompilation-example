@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - '*'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: "x86_64-pc-windows-gnu,aarch64-pc-windows-gnullvm,x86_64-unknown-linux-gnu"
+      - name: Install libsodium
+        run: apt install libsodium-dev
+      - name: Install minisign
+        run: chmod+x scripts/install_minisign.sh && ./scripts/install_minisign.sh
+      - name: Install zig
+        run: chmod +x scripts/install_zig.sh && ./scripts/install_zig.sh
+      - name: Install uv
+        run: pip install uv
+      - name: Build wheels
+        run: |
+          uv tool run maturin build --target x86_64-pc-windows-gnu --zig -i python3.10
+          uv tool run maturin build --target aarch64-pc-windows-gnullvm --zig -i python3.10
+          uv tool run maturin build  --zig -i python3.10
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-linux
+          path: target/wheels/
