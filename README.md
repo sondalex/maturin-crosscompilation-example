@@ -2,22 +2,28 @@
 
 ## Prerequisites
 
+Install mingw
+
+On Ubuntu
+
+> ```bash
+> sudo apt install mingw-w64
+> ``` 
 
 Install libsodium (required for manysign)
 
-    On Ubuntu
+> On Ubuntu
+> ```bash
+> sudo install libsodium-dev
+> ```
+>
+> On Fedora
+>
+> ```bash
+> sudo dnf install libsodium-devel
+> ```
 
-    ```bash
-    sudo install libsodium-dev
-    ```
-
-    On Fedora
-
-    ```bash
-    sudo dnf install libsodium-devel
-    ```
-
-Install manysign and zig, helpers are located in `scripts/`
+Install manysign and zig. Helpers are located in `scripts/`
 
 Install maturin
 
